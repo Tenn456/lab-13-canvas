@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		#sketch {
+			border:1px solid #000;
+		}
+	</style>
+</head>
+<body onload="draw()">
+	<canvas id="sketch" width="480" height="720"></canvas>
+
+	<script>
+
+		var sketch;
+		var context;
+		var circle;
+		var fps = 2;
+		var animation;
+		var acc = 0.1;
+		var dy = 0.8;
+		var min_dy_val = 0.01;
+
+		function draw() {
+		 	sketch = document.getElementById('sketch');
+			context = sketch.getContext("2d");
+			circle = {'x':sketch.offsetWidth / 2, 'y':0, 'r':25};
+			animation = setInterval(animate, fps);
+		}
+
+		function animate(){
+			context.clearRect(0, 0, sketch.offsetWidth, sketch.offsetHeight);
+			draw_circle(circle.x, circle.y, circle.r);
+			dy += acc;
+			circle.y += dy;
+
+			if(circle.y > 1386 - dy - circle.y){
+				dy *= -0.8;
+			}
+			if(circle.y > 698.5){
+				dy = 0;
+				acc = 0;
+			}
+
+			console.log(circle.y);
+		}
+
+		function draw_circle(x, y, r){
+			context.fillStyle = "#000000";
+			context.beginPath();
+			context.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI);
+			context.closePath();
+			context.fill();
+		}
+
+	</script>
+
+</body>
+</html>

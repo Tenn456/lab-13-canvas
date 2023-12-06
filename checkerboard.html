@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body onload="draw()">
+	<canvas id="sketch" width="1000" height="1000"></canvas>
+
+	<script>
+		function draw() {
+		 	var sketch = document.getElementById('sketch');
+			var context = sketch.getContext("2d");
+			var firstColor;
+			var secondColor;
+
+			context.strokeRect(50, 50, 400, 400);
+
+			for (let r = 1; r <= 8; r++) {
+				if(r % 2){
+					firstColor = "#FFFFFF";
+					secondColor = "#000000";
+				}
+				else{
+					firstColor = "#000000";
+					secondColor = "#FFFFFF";
+				}
+				for (let i = 1; i <= 8; i++) {
+					if(i % 2){
+						context.fillStyle = firstColor;
+					}
+					else{
+						context.fillStyle = secondColor;
+					}
+					context.beginPath();
+					context.fillRect((i * 50), (r * 50), 50, 50);
+					context.closePath();
+				}
+			}
+		}
+	</script>
+
+</body>
+</html>
